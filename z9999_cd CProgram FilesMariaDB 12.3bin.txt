@@ -1,2 +1,0 @@
-cd "C:\Program Files\MariaDB 12.3\bin"
-.\mariadb.exe -u root -p

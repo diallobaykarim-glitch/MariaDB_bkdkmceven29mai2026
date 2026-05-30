@@ -593,7 +593,7 @@ Ce projet est fourni à titre éducatif.
 
 ## 👨‍💻 Auteur
 
-**Diallo Bakarim**
+**Diallo Baykarim**
 - GitHub : https://github.com/diallobaykarim-glitch
 - Projet : ORL IA Platform
 - Date : 2026

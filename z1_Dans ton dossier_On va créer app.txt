@@ -1,0 +1,14 @@
+Dans ton dossier :
+
+```text
+C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026
+```
+
+On va créer :
+
+```text
+app/
+ ├── main.py
+ ├── database.py
+ ├── seed.py
+```

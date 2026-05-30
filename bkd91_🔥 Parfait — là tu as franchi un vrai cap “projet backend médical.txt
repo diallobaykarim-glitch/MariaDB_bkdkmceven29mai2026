@@ -1,0 +1,203 @@
+SHELL1
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026> python test_connexion.py
+CONNEXION OK ✔
+   id     nom  age          diagnostic
+0   1  Diallo   45  Sinusite chronique
+1   2     Sow   30               Otite
+2   3  Ndiaye   52        Polype nasal
+3   4      Ba   41    Cancer du larynx
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026>
+
+SHELL2
+
+PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026> uvicorn main:app --reload
+INFO:     Will watch for changes in these directories: ['C:\\Users\\UTILISATEUR\\Documents\\MariaDB_bkdkmCeven29mai2026']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [20776] using WatchFiles
+INFO:     Started server process [14352]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:64749 - "GET /patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64751 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+
+
+
+http://127.0.0.1:8000/patients
+
+[[1,"Diallo",45,"Sinusite chronique"],[2,"Sow",30,"Otite"],[3,"Ndiaye",52,"Polype nasal"],[4,"Ba",41,"Cancer du larynx"]]
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+🔥 Parfait — là tu as franchi un vrai cap “projet backend médical”.
+
+---
+
+# ✅ ÉTAT ACTUEL (TRÈS IMPORTANT)
+
+Tu as maintenant une stack complète fonctionnelle :
+
+## 🟢 SHELL 1
+
+* Python env actif
+* connexion test OK
+* lecture MariaDB OK
+
+## 🟢 SHELL 2
+
+* FastAPI lancé correctement
+* endpoint `/patients` OK
+* réponse HTTP 200 OK
+
+---
+
+# 🧠 CE QUE TU AS RÉELLEMENT CONSTRUIT
+
+Tu as maintenant une vraie architecture :
+
+```text id="arch1"
+FastAPI (API)
+   ↓
+Python (logic)
+   ↓
+:contentReference[oaicite:0]{index=0}
+   ↓
+Table patients ORL
+```
+
+---
+
+# ⚠️ PETITE OBSERVATION
+
+Réponse actuelle :
+
+```json id="json1"
+[[1,"Diallo",45,"Sinusite chronique"],...]
+```
+
+👉 C’est fonctionnel MAIS pas encore propre API médicale.
+
+---
+
+# 🚀 PROCHAINE ÉTAPE (IMPORTANT)
+
+On va améliorer ton API pour niveau “hôpital IA”.
+
+## 🎯 OBJECTIF
+
+Transformer ceci :
+
+```json
+[[1,"Diallo",45,"Sinusite chronique"]]
+```
+
+en :
+
+```json
+{
+  "id": 1,
+  "nom": "Diallo",
+  "age": 45,
+  "diagnostic": "Sinusite chronique"
+}
+```
+
+---
+
+# 🔥 ÉTAPE 1 — AMÉLIORER main.py
+
+Remplace `/patients` par ceci :
+
+```python id="api1"
+@app.get("/patients")
+def get_patients():
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM patients")
+    rows = cur.fetchall()
+    conn.close()
+
+    return [
+        {
+            "id": r[0],
+            "nom": r[1],
+            "age": r[2],
+            "diagnostic": r[3]
+        }
+        for r in rows
+    ]
+```
+
+---
+
+# 🚀 ÉTAPE 2 — RESTART FASTAPI
+
+Dans SHELL2 :
+
+```bash id="restart1"
+CTRL + C
+```
+
+Puis :
+
+```bash id="restart2"
+uvicorn main:app --reload
+```
+
+---
+
+# 🌐 RÉSULTAT ATTENDU
+
+```json id="final1"
+[
+  {
+    "id": 1,
+    "nom": "Diallo",
+    "age": 45,
+    "diagnostic": "Sinusite chronique"
+  }
+]
+```
++++++++++++++++++++++++++++++++++BKDKMCSEUL+++++++++++++++++++++++++++++++++++++++++++
+
+http://127.0.0.1:8000/patient
+[{"id":1,"nom":"Diallo","age":45,"diagnostic":"Sinusite chronique"},{"id":2,"nom":"Sow","age":30,"diagnostic":"Otite"},{"id":3,"nom":"Ndiaye","age":52,"diagnostic":"Polype nasal"},{"id":4,"nom":"Ba","age":41,"diagnostic":"Cancer du larynx"}]
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+---
+
+# 🧠 PROCHAINE ÉTAPE (TRÈS IMPORTANTE)
+
+Ensuite on passe au niveau supérieur :
+
+## 🔥 1. INSERT PATIENT (POST API)
+
+## 🔥 2. 129 patients automatiques (dataset ORL)
+
+## 🔥 3. IA prédictive (cancer vs sinusite vs allergie)
+
+## 🔥 4. scoring médical
+
+---
+
+# 💡 CE QUE TU ES EN TRAIN DE CONSTRUIRE
+
+Tu es en train de créer :
+
+👉 un mini système hospitalier IA ORL complet
+
+---
+
+# 👉 DIS-MOI JUSTE
+
+**“API propre OK”**
+
+et je t’envoie directement :
+
+✔ POST patient
+✔ génération 129 patients
+✔ base IA médicale
+✔ structure production réelle 🚀

@@ -1,0 +1,428 @@
++++++++++++++++++++++++++++++++++++++D'accord API FastAPI++++++++++++++++++++++++++++++++++++++
+PRECISER NOMBRE DE SHELL(S)
+FOURNIR L'INTEGRALITE des CODES
+Un nombre de 129 patients RHINOLOGIE ( 7 cancers du cavum, 5 cancers du sinus maxillaire
+53 sinusites, 55 allergie naso-sinusienne, 9 autres pathologies rhinologiques) tout AGE, les 2 SEXES POUR MIEUX FIXER
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Parfait 👍 on passe à une vraie architecture de projet médical.
+
+On va faire ça proprement avec :
+
+* MariaDB (déjà OK chez toi)
+* FastAPI (API ORL IA)
+* génération de **129 patients réalistes**
+
+---
+
+# 🧠 1. NOMBRE DE SHELLS À UTILISER
+
+## 👉 Tu auras seulement 2 SHELLS
+
+### 🔵 SHELL 1 — MariaDB (déjà existant)
+
+* serveur base de données
+* tu peux le laisser tourner en service Windows
+
+### 🟢 SHELL 2 — FastAPI (nouveau terminal)
+
+👉 c’est là que tu vas lancer Python API
+
+---
+
+# 🚀 2. STRUCTURE DU PROJET
+
+Dans ton dossier :
+
+```text
+C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026
+```
+
+On va créer :
+
+```text
+app/
+ ├── main.py
+ ├── database.py
+ ├── seed.py
+```
+
+---
+
+# 🟡 3. SHELL 2 — INSTALLATION FASTAPI
+
+Dans TON ENV ACTIVÉ :
+
+```powershell
+pip install fastapi uvicorn mariadb pandas
+```
+
+---
+
+# 🟢 4. DATABASE CONNECTION (database.py)
+
+```python
+import mariadb
+
+def get_connection():
+    return mariadb.connect(
+        host="localhost",
+        user="root",
+        password="root123",
+        database="orl_ia"
+    )
+```
+
+---
+
+# 🟢 5. API FASTAPI (main.py)
+
+```python
+from fastapi import FastAPI
+from database import get_connection
+
+app = FastAPI(title="ORL IA API")
+
+@app.get("/")
+def home():
+    return {"message": "API ORL IA active"}
+
+@app.get("/patients")
+def get_patients():
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM patients")
+    rows = cur.fetchall()
+    conn.close()
+    return rows
+```
+
+---
+
+# 🟢 6. GÉNÉRATION DES 129 PATIENTS (seed.py)
+
+👉 EXACTEMENT ce que tu as demandé :
+
+* 129 patients
+* pathologies ORL réalistes
+* âge mixte
+* hommes + femmes
+
+```python
+import random
+import mariadb
+
+conn = mariadb.connect(
+    host="localhost",
+    user="root",
+    password="root123",
+    database="orl_ia"
+)
+
+cur = conn.cursor()
+
+# reset table
+cur.execute("DELETE FROM patients")
+
+pathologies = (
+    ["Cancer du cavum"] * 7 +
+    ["Cancer sinus maxillaire"] * 5 +
+    ["Sinusite"] * 53 +
+    ["Allergie naso-sinusienne"] * 55 +
+    ["Autre pathologie ORL"] * 9
+)
+
+noms = ["Diallo", "Sow", "Ndiaye", "Ba", "Fall", "Diop", "Sarr", "Ndao", "Kane", "Gueye"]
+
+for i in range(129):
+    nom = random.choice(noms)
+    age = random.randint(5, 85)
+    sexe = random.choice(["M", "F"])
+    diag = pathologies[i]
+
+    cur.execute(
+        "INSERT INTO patients (nom, age, diagnostic) VALUES (?, ?, ?)",
+        (f"{nom}-{sexe}", age, diag)
+    )
+
+conn.commit()
+conn.close()
+
+print("129 patients ORL insérés ✔")
+```
+
+---
+
+# 🚀 7. LANCEMENT API (SHELL 2)
+
+```powershell
+uvicorn main:app --reload
+```
+
+---
+
+# 🌐 8. TEST NAVIGATEUR
+
+```text
+http://127.0.0.1:8000/patients
+```
+
+---
+
+# ⚠️ POINT IMPORTANT
+
+Avant seed.py assure-toi que ta table est bien :
+
+```sql
+CREATE TABLE patients (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100),
+    age INT,
+    diagnostic VARCHAR(255)
+);
+```
+
+---
+
+# 🧠 CE QUE TU VIENS DE CONSTRUIRE
+
+✔ Base médicale ORL
+✔ Simulation 129 patients
+✔ API FastAPI
+✔ architecture IA hospitalière
+
+---
+
+# 🚀 PROCHAINE ÉTAPE (TRÈS IMPORTANTE)
+
+On pourra faire :
+
+## 👉 IA prédictive ORL
+
+* cancer vs sinusite vs allergie
+* modèle ML (scikit-learn)
+* scoring patient
+
+---
+
+👉 Dis-moi juste :
+**“ON EXECUTE”**
+
+et je te guide étape par étape sans erreur (API + seed + test réel).
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++
+
+SHELL1
+
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026>
+
+
+SHELL2
+
+Using cached mariadb-1.1.14-cp313-cp313-win_amd64.whl (202 kB)
+Installing collected packages: mariadb
+Successfully installed mariadb-1.1.14
+PS C:\Users\UTILISATEUR> uvicorn main:app --reload
+INFO:     Will watch for changes in these directories: ['C:\\Users\\UTILISATEUR']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [22824] using WatchFiles
+Process SpawnProcess-1:
+Traceback (most recent call last):
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\uvicorn\_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    ~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\asyncio\base_events.py", line 721, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\uvicorn\server.py", line 79, in serve
+    await self._serve(sockets)
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\uvicorn\server.py", line 86, in _serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\uvicorn\config.py", line 441, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\uvicorn\importer.py", line 22, in import_from_string
+    raise exc from None
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\uvicorn\importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "C:\Users\UTILISATEUR\miniconda3\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1022, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\UTILISATEUR\main.py", line 3, in <module>
+    from mongodb_query_expression import parse
+ModuleNotFoundError: No module named 'mongodb_query_expression'
+
+
++++++++++++++++++++++++Parfait 👍 on a une erreur claire et classique+++++++++++++++++++
+
+
+Parfait 👍 on a une erreur claire et classique.
+
+---
+
+# ❌ PROBLÈME ACTUEL
+
+Ton serveur FastAPI plante parce que dans ton fichier :
+
+```text id="err1"
+main.py
+```
+
+tu as cette ligne :
+
+```python id="err2"
+from mongodb_query_expression import parse
+```
+
+👉 MAIS :
+
+* tu n’utilises PAS MongoDB
+* tu travailles avec MariaDB
+* ce module n’existe pas dans ton environnement
+
+---
+
+# 🚨 ERREUR PRINCIPALE
+
+```text id="err3"
+ModuleNotFoundError: No module named 'mongodb_query_expression'
+```
+
+---
+
+# 🔥 SOLUTION IMMÉDIATE
+
+## 👉 1. OUVRE ton fichier `main.py`
+
+Et SUPPRIME cette ligne :
+
+```python id="fix1"
+from mongodb_query_expression import parse
+```
+
+---
+
+## 👉 2. REMPLACE ton `main.py` par ceci (PROPRE + CORRECT)
+
+```python id="fix2"
+from fastapi import FastAPI
+import mariadb
+
+app = FastAPI(title="ORL IA API")
+
+def get_connection():
+    return mariadb.connect(
+        host="localhost",
+        user="root",
+        password="root123",
+        database="orl_ia"
+    )
+
+@app.get("/")
+def home():
+    return {"message": "API ORL IA OK"}
+
+@app.get("/patients")
+def get_patients():
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM patients")
+    rows = cur.fetchall()
+    conn.close()
+    return rows
+```
+
+---
+
+## 👉 3. RELANCER FASTAPI
+
+Dans SHELL 2 :
+
+```powershell id="run1"
+uvicorn main:app --reload
+```
+
+---
+
+# 🌐 TEST
+
+Ouvre :
+
+```text id="url1"
+http://127.0.0.1:8000/patients
+```
+
+---
+
+# 🎯 CE QUE TU ES EN TRAIN DE CONSTRUIRE
+
+Tu es en train de créer une vraie API médicale :
+
+✔ FastAPI
+✔ MariaDB backend
+✔ table patients ORL
+✔ architecture IA hospitalière
+
+---
+
+# ⚠️ IMPORTANT
+
+Tu as mélangé un ancien import MongoDB → à éviter totalement.
+
+On reste uniquement sur :
+
+* Python
+* FastAPI
+* MariaDB
+
+---
+
+# 🚀 PROCHAINE ÉTAPE (APRES FIX)
+
+On va faire :
+
+## 👉 génération automatique 129 patients
+
+## 👉 endpoint POST /patients
+
+## 👉 API diagnostic ORL IA
+
+---
+
+👉 Dis-moi juste :
+**“API relancée”**
+
+et je t’enchaîne vers le niveau IA médicale avancée 🚀
+
+
+++++++++++++++++++++++++++++API relancée pour niveau IA médicale avancée +++++++++++++++++++++++++
+
+
+
+
+
+

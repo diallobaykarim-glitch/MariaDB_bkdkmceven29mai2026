@@ -1,0 +1,20 @@
+Commandes Windows similaires aux `.bat` :
+
+**Exécution directe (PowerShell)** :
+```powershell
+Start-Process "C:\xampp\xampp-control.exe"
+Start-Sleep -Seconds 5
+Start-Process "http://localhost/phpmyadmin"
+
++++++++++++++++++++++++++++++++++++++++++++++++++++bkdSEULkmc ps idem bat++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Start-Process "C:\users\utilisateur\documents\xampp\xampp-control.exe"
+Start-Sleep -Seconds 5
+Start-Process "http://localhost/phpmyadmin"
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+

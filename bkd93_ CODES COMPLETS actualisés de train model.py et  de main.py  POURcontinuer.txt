@@ -1,0 +1,962 @@
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026> python train_model.py
+C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026\train_model.py:22: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql(query, conn)
+C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026\env\Lib\site-packages\sklearn\utils\validation.py:2691: UserWarning: X does not have valid feature names, but DecisionTreeClassifier was fitted with feature names
+  warnings.warn(
+Prediction : Allergie naso-sinusienne
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026>
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++LES 2 WARNINGS+++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Excellent 🔥
+Ton premier modèle IA ORL fonctionne correctement.
+
+---
+
+# ✅ CE QUE SIGNIFIE LE RÉSULTAT
+
+Tu as maintenant :
+
+✔ Machine Learning médical
+✔ entraînement sur tes patients ORL
+✔ prédiction automatique diagnostic
+✔ pipeline IA complet relié à MariaDB
+
+---
+
+# 🧠 LE MODÈLE A PRÉDIT
+
+```text id="pred1"
+Prediction : Allergie naso-sinusienne
+```
+
+pour :
+
+```text id="pred2"
+âge = 60
+sexe = homme
+```
+
+---
+
+# ⚠️ LES 2 WARNINGS
+
+Ils ne bloquent PAS ton projet.
+
+---
+
+## ⚠️ Warning 1 — pandas / SQLAlchemy
+
+```text id="warn1"
+pandas only supports SQLAlchemy...
+```
+
+👉 ce n’est PAS une erreur
+👉 juste un conseil technique
+
+Ton code fonctionne déjà correctement ✔
+
+---
+
+## ⚠️ Warning 2 — feature names
+
+```text id="warn2"
+X does not have valid feature names
+```
+
+👉 pareil : pas bloquant
+
+---
+
+# 🚀 VERSION PROPRE (SANS WARNINGS)
+
+Remplace la partie prédiction par :
+
+```python id="clean1"
+sample = pd.DataFrame(
+    [[60, 1]],
+    columns=["age", "sexe"]
+)
+
+prediction = model.predict(sample)
+
+diag = encoder.inverse_transform(prediction)
+
+print("Prediction :", diag[0])
+```
+
+---
+
+# 🚀 PROCHAINE ÉTAPE MAJEURE
+
+Maintenant on va transformer ton IA en :
+
+# 🎯 API IA MÉDICALE
+
+Tu vas pouvoir appeler :
+
+```text id="apiia1"
+POST /predict
+```
+
+avec :
+
+```json id="apiia2"
+{
+  "age": 60,
+  "sexe": 1
+}
+```
+
+et obtenir :
+
+```json id="apiia3"
+{
+  "prediction": "Allergie naso-sinusienne"
+}
+```
+
+---
+
+# 🧠 ARCHITECTURE QUE TU AS MAINTENANT
+
+```text id="arch2"
+FastAPI
+   ↓
+Machine Learning
+   ↓
+MariaDB
+   ↓
+Patients ORL
+```
+
+---
+
+# 🚀 PROCHAINE ÉTAPE
+
+On va maintenant :
+
+## 🔥 intégrer le modèle IA dans FastAPI
+
+## 🔥 créer `/predict`
+
+## 🔥 faire une vraie API IA ORL
+
+---
+
+👉 Dis-moi juste :
+
+```text id="nextapi"
+ON CONTINUE API IA
+```
+
+et je te donnerai :
+
+* le code COMPLET actualisé
+* exactement quoi modifier
+* dans quel fichier
+* quels shells utiliser 🚀
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+import mariadb
+import pandas as pd
+
+from sklearn.preprocessing import LabelEncoder
+from sklearn.tree import DecisionTreeClassifier
+
+# =========================
+# CONNEXION DB
+# =========================
+conn = mariadb.connect(
+    host="localhost",
+    user="root",
+    password="root123",
+    database="orl_ia"
+)
+
+# =========================
+# LECTURE TABLE
+# =========================
+query = "SELECT nom, age, diagnostic FROM patients"
+
+df = pd.read_sql(query, conn)
+
+conn.close()
+
+# =========================
+# EXTRACTION SEXE
+# =========================
+df["sexe"] = df["nom"].apply(
+    lambda x: 1 if "-M" in x else 0
+)
+
+# =========================
+# FEATURES
+# =========================
+X = df[["age", "sexe"]]
+
+# =========================
+# TARGET
+# =========================
+encoder = LabelEncoder()
+
+y = encoder.fit_transform(df["diagnostic"])
+
+# =========================
+# MODEL
+# =========================
+model = DecisionTreeClassifier()
+
+model.fit(X, y)
+
+# =========================
+# TEST PREDICTION
+# =========================
+sample = pd.DataFrame(
+    [[60, 1]],
+    columns=["age", "sexe"]
+)
+
+prediction = model.predict(sample)
+
+diag = encoder.inverse_transform(prediction)
+
+print("Prediction :", diag[0])
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Oui 👍 ce code est maintenant propre et meilleur.
+
+La correction :
+
+```python id="okpred"
+sample = pd.DataFrame(
+    [[60, 1]],
+    columns=["age", "sexe"]
+)
+```
+
+supprime le warning :
+
+```text id="warnfix"
+X does not have valid feature names
+```
+
+---
+
+# ✅ TON FICHIER `train_model.py` EST MAINTENANT CORRECT
+
+Tu as :
+
+✔ connexion MariaDB
+✔ lecture patients ORL
+✔ préparation données
+✔ encodage diagnostics
+✔ entraînement IA
+✔ prédiction test
+
+---
+
+# 🧠 CE QUE FAIT TON IA
+
+Le modèle apprend les relations entre :
+
+| Entrées | Sortie     |
+| ------- | ---------- |
+| âge     | diagnostic |
+| sexe    | diagnostic |
+
+---
+
+# 🎯 EXEMPLE
+
+```python id="example1"
+[[60, 1]]
+```
+
+signifie :
+
+| Valeur | Signification |
+| ------ | ------------- |
+| 60     | âge           |
+| 1      | homme         |
+
+---
+
+# 🚀 PROCHAINE ÉTAPE IMPORTANTE
+
+Maintenant on va connecter cette IA à FastAPI.
+
+Tu vas obtenir :
+
+# 🌐 API IA MÉDICALE
+
+```text id="predictapi"
+POST /predict
+```
+
+---
+
+# 🎯 EXEMPLE
+
+Tu enverras :
+
+```json id="predictjson"
+{
+  "age": 60,
+  "sexe": 1
+}
+```
+
+et l’API répondra :
+
+```json id="predictresponse"
+{
+  "prediction": "Allergie naso-sinusienne"
+}
+```
+
+---
+
+# 🧠 NOMBRE DE SHELLS
+
+## 🟢 SHELL1
+
+Python / fichiers IA
+
+## 🟢 SHELL2
+
+FastAPI actif
+
+👉 garder les 2 ouverts.
+
+---
+
+# 🚀 PROCHAINE ÉTAPE
+
+Nous allons modifier :
+
+```text id="mainnext"
+main.py
+```
+
+pour intégrer :
+
+* modèle IA
+* prédiction
+* endpoint `/predict`
+
+---
+
+👉 Écris simplement :
+
+```text id="continueia"
+ON CONTINUE API IA
+```
+
+et je te donnerai :
+
+* le CODE COMPLET actualisé de `main.py`
+* exactement où le mettre
+* comment tester `/predict`
+* sans casser ton API actuelle 🚀
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026> python train_model.py
+C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026\train_model.py:22: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql(query, conn)
+Prediction : Allergie naso-sinusienne
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026>
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Parfait 👍
+Il ne reste plus qu’un warning mineur :
+
+```text id="warnsql"
+pandas only supports SQLAlchemy...
+```
+
+👉 ce n’est PAS une erreur.
+Ton IA fonctionne déjà correctement.
+
+---
+
+# ✅ POURQUOI CE WARNING APPARAÎT
+
+Parce que :
+
+```python id="sql1"
+pd.read_sql(query, conn)
+```
+
+utilise directement la connexion MariaDB.
+
+Pandas préfère :
+
+* SQLAlchemy
+* SQLite
+* URI SQL
+
+---
+
+# 🚀 SOLUTION SIMPLE ET PROPRE (SANS WARNING)
+
+Remplace cette partie :
+
+```python id="old1"
+query = "SELECT nom, age, diagnostic FROM patients"
+
+df = pd.read_sql(query, conn)
+```
+
+par :
+
+```python id="new1"
+cur = conn.cursor()
+
+cur.execute(
+    "SELECT nom, age, diagnostic FROM patients"
+)
+
+rows = cur.fetchall()
+
+df = pd.DataFrame(
+    rows,
+    columns=["nom", "age", "diagnostic"]
+)
+```
+
+---
+
+# ✅ RÉSULTAT
+
+Tu n’auras plus :
+
+```text id="nowarn"
+UserWarning: pandas only supports SQLAlchemy...
+```
+
+---
+
+# 🚀 VERSION PROPRE COMPLÈTE
+
+Ton `train_model.py` devient :
+
+```python id="fullclean"
+import mariadb
+import pandas as pd
+
+from sklearn.preprocessing import LabelEncoder
+from sklearn.tree import DecisionTreeClassifier
+
+# =========================
+# CONNEXION DB
+# =========================
+conn = mariadb.connect(
+    host="localhost",
+    user="root",
+    password="root123",
+    database="orl_ia"
+)
+
+# =========================
+# LECTURE TABLE
+# =========================
+cur = conn.cursor()
+
+cur.execute(
+    "SELECT nom, age, diagnostic FROM patients"
+)
+
+rows = cur.fetchall()
+
+df = pd.DataFrame(
+    rows,
+    columns=["nom", "age", "diagnostic"]
+)
+
+conn.close()
+
+# =========================
+# EXTRACTION SEXE
+# =========================
+df["sexe"] = df["nom"].apply(
+    lambda x: 1 if "-M" in x else 0
+)
+
+# =========================
+# FEATURES
+# =========================
+X = df[["age", "sexe"]]
+
+# =========================
+# TARGET
+# =========================
+encoder = LabelEncoder()
+
+y = encoder.fit_transform(df["diagnostic"])
+
+# =========================
+# MODEL
+# =========================
+model = DecisionTreeClassifier()
+
+model.fit(X, y)
+
+# =========================
+# TEST PREDICTION
+# =========================
+sample = pd.DataFrame(
+    [[60, 1]],
+    columns=["age", "sexe"]
+)
+
+prediction = model.predict(sample)
+
+diag = encoder.inverse_transform(prediction)
+
+print("Prediction :", diag[0])
+```
+
+---
+
+# 🚀 PROCHAINE ÉTAPE MAJEURE
+
+Tu es maintenant prêt pour :
+
+# 🌐 API IA MÉDICALE `/predict`
+
+avec :
+
+* FastAPI
+* Machine Learning
+* prédiction temps réel
+
+---
+
+# 🎯 EXEMPLE FINAL
+
+```json id="predict1"
+POST /predict
+```
+
+```json id="predict2"
+{
+  "age": 60,
+  "sexe": 1
+}
+```
+
+→ réponse :
+
+```json id="predict3"
+{
+  "prediction": "Allergie naso-sinusienne"
+}
+```
+
+---
+
+👉 Maintenant tu peux lancer :
+
+```powershell id="rerun1"
+python train_model.py
+```
+
+pour vérifier qu’il n’y a plus de warning.
+
+Puis écris :
+
+```text id="next1"
+ON CONTINUE API IA
+```
+
+et je te donnerai le code COMPLET de `main.py` avec IA intégrée 🚀
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026> python train_model.py
+Prediction : Allergie naso-sinusienne
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026>
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Excellent 🎉
+Ton pipeline IA ORL est maintenant propre et sans warning.
+
+Tu as :
+
+✔ Base MariaDB
+✔ API FastAPI
+✔ Dataset ORL
+✔ Machine Learning
+✔ Prédiction médicale
+
+---
+
+# 🚀 ON CONTINUE API IA
+
+Nous allons maintenant intégrer le modèle IA directement dans :
+
+```text id="filemain"
+main.py
+```
+
+---
+
+# 🧠 NOMBRE DE SHELLS
+
+## 🟢 SHELL1
+
+édition fichiers Python
+
+## 🟢 SHELL2
+
+FastAPI actif
+
+👉 garder les 2.
+
+---
+
+# 🚀 ÉTAPE 1 — REMPLACER COMPLÈTEMENT `main.py`
+
+Dans :
+
+```text id="folder1"
+C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026
+```
+
+ouvrir :
+
+```text id="folder2"
+main.py
+```
+
+---
+
+# 🚀 CODE COMPLET FINAL `main.py`
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+import mariadb
+import pandas as pd
+
+from sklearn.preprocessing import LabelEncoder
+from sklearn.tree import DecisionTreeClassifier
+
+app = FastAPI(title="ORL IA API")
+
+# =========================
+# CONNEXION DATABASE
+# =========================
+def get_connection():
+    return mariadb.connect(
+        host="localhost",
+        user="root",
+        password="root123",
+        database="orl_ia"
+    )
+
+# =========================
+# MODELES
+# =========================
+class Patient(BaseModel):
+    nom: str
+    age: int
+    diagnostic: str
+
+class PredictInput(BaseModel):
+    age: int
+    sexe: int
+
+# =========================
+# TRAIN IA MODEL
+# =========================
+def train_model():
+
+    conn = get_connection()
+
+    cur = conn.cursor()
+
+    cur.execute(
+        "SELECT nom, age, diagnostic FROM patients"
+    )
+
+    rows = cur.fetchall()
+
+    df = pd.DataFrame(
+        rows,
+        columns=["nom", "age", "diagnostic"]
+    )
+
+    conn.close()
+
+    # extraction sexe
+    df["sexe"] = df["nom"].apply(
+        lambda x: 1 if "-M" in x else 0
+    )
+
+    # features
+    X = df[["age", "sexe"]]
+
+    # target
+    encoder = LabelEncoder()
+
+    y = encoder.fit_transform(df["diagnostic"])
+
+    # model
+    model = DecisionTreeClassifier()
+
+    model.fit(X, y)
+
+    return model, encoder
+
+# =========================
+# LOAD MODEL
+# =========================
+model, encoder = train_model()
+
+# =========================
+# HOME
+# =========================
+@app.get("/")
+def home():
+    return {"message": "API ORL IA active"}
+
+# =========================
+# GET PATIENTS
+# =========================
+@app.get("/patients")
+def get_patients():
+
+    conn = get_connection()
+
+    cur = conn.cursor()
+
+    cur.execute("SELECT * FROM patients")
+
+    rows = cur.fetchall()
+
+    conn.close()
+
+    return [
+        {
+            "id": r[0],
+            "nom": r[1],
+            "age": r[2],
+            "diagnostic": r[3]
+        }
+        for r in rows
+    ]
+
+# =========================
+# ADD PATIENT
+# =========================
+@app.post("/patients")
+def add_patient(p: Patient):
+
+    conn = get_connection()
+
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        INSERT INTO patients (nom, age, diagnostic)
+        VALUES (?, ?, ?)
+        """,
+        (p.nom, p.age, p.diagnostic)
+    )
+
+    conn.commit()
+
+    conn.close()
+
+    return {"message": "Patient ajouté ✔"}
+
+# =========================
+# STATS
+# =========================
+@app.get("/stats")
+def get_stats():
+
+    conn = get_connection()
+
+    cur = conn.cursor()
+
+    stats = {}
+
+    cur.execute("SELECT COUNT(*) FROM patients")
+    stats["total_patients"] = cur.fetchone()[0]
+
+    cur.execute("""
+        SELECT COUNT(*)
+        FROM patients
+        WHERE diagnostic='Sinusite'
+    """)
+    stats["sinusites"] = cur.fetchone()[0]
+
+    cur.execute("""
+        SELECT COUNT(*)
+        FROM patients
+        WHERE diagnostic='Allergie naso-sinusienne'
+    """)
+    stats["allergies"] = cur.fetchone()[0]
+
+    cur.execute("""
+        SELECT COUNT(*)
+        FROM patients
+        WHERE diagnostic='Cancer du cavum'
+    """)
+    stats["cancers_cavum"] = cur.fetchone()[0]
+
+    cur.execute("""
+        SELECT COUNT(*)
+        FROM patients
+        WHERE diagnostic='Cancer sinus maxillaire'
+    """)
+    stats["cancers_sinus_maxillaire"] = cur.fetchone()[0]
+
+    conn.close()
+
+    return stats
+
+# =========================
+# IA PREDICTION
+# =========================
+@app.post("/predict")
+def predict(data: PredictInput):
+
+    sample = pd.DataFrame(
+        [[data.age, data.sexe]],
+        columns=["age", "sexe"]
+    )
+
+    prediction = model.predict(sample)
+
+    diagnostic = encoder.inverse_transform(
+        prediction
+    )
+
+    return {
+        "prediction": diagnostic[0]
+    }
+```
+
+---
+
+# 🚀 ÉTAPE 2 — FASTAPI RELOAD
+
+SHELL2 recharge automatiquement normalement.
+
+Sinon :
+
+```powershell
+CTRL + C
+```
+
+puis :
+
+```powershell
+uvicorn main:app --reload
+```
+
+---
+
+# 🌐 TEST IA
+
+Ouvre :
+
+```text id="docsia"
+http://127.0.0.1:8000/docs
+```
+
+---
+
+# 🚀 TEST `/predict`
+
+## POST `/predict`
+
+Cliquer :
+
+```text id="try1"
+Try it out
+```
+
+---
+
+## JSON :
+
+```json
+{
+  "age": 60,
+  "sexe": 1
+}
+```
+
+---
+
+# 🎯 RÉSULTAT ATTENDU
+
+```json
+{
+  "prediction": "Allergie naso-sinusienne"
+}
+```
+
+---
+
+# 🧠 SIGNIFICATION
+
+| Valeur   | Sens  |
+| -------- | ----- |
+| sexe = 1 | homme |
+| sexe = 0 | femme |
+
+---
+
+# 🚀 TU AS MAINTENANT
+
+✔ API médicale
+✔ statistiques
+✔ Machine Learning
+✔ prédiction IA temps réel
+✔ backend clinique ORL
+
+---
+
+# 🚀 APRÈS ÇA
+
+On pourra faire :
+
+## 🔥 sauvegarde modèle `.pkl`
+
+## 🔥 dashboard Streamlit
+
+## 🔥 graphiques médicaux
+
+## 🔥 Dockerisation
+
+## 🔥 Swagger médical avancé
+
+## 🔥 IA plus réaliste avec symptômes
+
+

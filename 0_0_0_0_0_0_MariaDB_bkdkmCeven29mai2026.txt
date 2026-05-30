@@ -1,0 +1,72 @@
+C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026\mariadb-12.3.2-winx64
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Le dossier :
+
+```text
+C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026\mariadb-12.3.2-winx64
+```
+
+semble être le dossier extrait de MariaDB sous Windows.
+
+Pour continuer proprement, ouvrez un terminal PowerShell dans ce dossier :
+
+```powershell
+cd "C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026\mariadb-12.3.2-winx64"
+```
+
+Puis vérifiez le contenu :
+
+```powershell
+dir
+```
+
+Vous devriez voir des dossiers comme :
+
+```text
+bin
+data
+share
+support-files
+```
+
+Ensuite, allez dans `bin` :
+
+```powershell
+cd bin
+```
+
+et testez :
+
+```powershell
+.\mariadb.exe --version
+```
+
+ou :
+
+```powershell
+.\mysqld.exe --version
+```
+
+Si cela fonctionne, MariaDB est correctement présent.
+
+Ensuite nous pourrons :
+
+1. Initialiser le dossier `data`
+2. Créer le fichier `my.ini`
+3. Démarrer le serveur MariaDB
+4. Tester la connexion SQL
+5. Ajouter MariaDB au PATH Windows si souhaité
+
+Copiez simplement le résultat de :
+
+```powershell
+dir
+```
+
+puis :
+
+```powershell
+cd bin
+.\mysqld.exe --version
+```

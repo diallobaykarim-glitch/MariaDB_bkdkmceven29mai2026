@@ -1,0 +1,39 @@
+STRUCTURE PROJET  EN COURS
+PROJECT/
+│
+├── api_orl/          → FastAPI ORL (MariaDB)
+├── api_oracle/       → FastAPI Hospital (Oracle DB)
+├── streamlit_app/    → Dashboard global
+│
+├── db_orl/           → MariaDB init
+├── db_oracle/        → Oracle init scripts
+│
+├── docker-compose.yml
+├── .env
+
+
+
+
+
+
+MariaDB_project/
+│
+├── api/
+│   ├── main.py
+│   ├── model.pkl
+│   ├── db.py
+│   ├── schemas.py
+│   ├── requirements.txt
+│   └── Dockerfile
+│
+├── streamlit_app/
+│   ├── app.py
+│   └── Dockerfile
+│
+├── db/
+│   ├── init.sql
+│   └── seed_full.sql   ← IMPORTANT
+│
+├── docker-compose.yml
+├── .env
+└── README.md

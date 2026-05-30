@@ -1,0 +1,414 @@
+++++++++++++++++++++À partir de maintenant, pour utiliser MariaDB++++++++++++++++
+
+				VOIR CARREMENT en BAS. 
+
+
+bkdkmc RAPPEL ETATS des 2 SHELLS
+
+SHELL1
+C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\requests\__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (7.4.3)/charset_normalizer (3.4.7) doesn't match a supported version!
+  warnings.warn(
+(base) PS C:\WINDOWS\system32> Stop-Service MariaDB
+(base) PS C:\WINDOWS\system32> Get-Service MariaDB
+
+Status   Name               DisplayName
+------   ----               -----------
+Stopped  MariaDB            MariaDB
+
+
+(base) PS C:\WINDOWS\system32> cd "C:\Program Files\MariaDB 12.3\bin"
+(base) PS C:\Program Files\MariaDB 12.3\bin> .\mysqld.exe --skip-grant-tables
+(base) PS C:\Program Files\MariaDB 12.3\bin> Start-Service MariaDB
+(base) PS C:\Program Files\MariaDB 12.3\bin> Get-Service MariaDB
+
+Status   Name               DisplayName
+------   ----               -----------
+Running  MariaDB            MariaDB
+
+
+(base) PS C:\Program Files\MariaDB 12.3\bin>
+
+
+
+
+
+SHELL2
+
+C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\requests\__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (7.4.3)/charset_normalizer (3.4.7) doesn't match a supported version!
+  warnings.warn(
+(base) PS C:\WINDOWS\system32> cd "C:\Program Files\MariaDB 12.3\bin"
+(base) PS C:\Program Files\MariaDB 12.3\bin> .\mariadb.exe
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 12.3.2-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [(none)]> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [(none)]> SELECT user, host FROM mysql.user;
++-------------+-----------------+
+| User        | Host            |
++-------------+-----------------+
+| PUBLIC      |                 |
+| root        | 127.0.0.1       |
+| root        | ::1             |
+| root        | desktop-eqgunkh |
+| mariadb.sys | localhost       |
+| root        | localhost       |
++-------------+-----------------+
+6 rows in set (0.026 sec)
+
+MariaDB [(none)]> exit
+Bye
+(base) PS C:\Program Files\MariaDB 12.3\bin> .\mariadb.exe -u root -p
+Enter password: *******
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 12.3.2-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| test               |
++--------------------+
+5 rows in set (0.022 sec)
+
+MariaDB [(none)]> CREATE DATABASE orl_ia;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| orl_ia             |
+| performance_schema |
+| sys                |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> USE orl_ia;
+Database changed
+MariaDB [orl_ia]> CREATE TABLE patients (
+    ->     id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     nom VARCHAR(100),
+    ->     age INT,
+    ->     diagnostic VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [orl_ia]> SHOW TABLES;
++------------------+
+| Tables_in_orl_ia |
++------------------+
+| patients         |
++------------------+
+1 row in set (0.001 sec)
+
+MariaDB [orl_ia]> INSERT INTO patients (nom, age, diagnostic)
+    -> VALUES ('Diallo', 45, 'Sinusite chronique');
+Query OK, 1 row affected (0.046 sec)
+
+MariaDB [orl_ia]> SELECT * FROM patients;
++----+--------+------+--------------------+
+| id | nom    | age  | diagnostic         |
++----+--------+------+--------------------+
+|  1 | Diallo |   45 | Sinusite chronique |
++----+--------+------+--------------------+
+1 row in set (0.017 sec)
+
+MariaDB [orl_ia]> INSERT INTO patients (nom, age, diagnostic)
+    -> VALUES
+    -> ('Sow', 30, 'Otite'),
+    -> ('Ndiaye', 52, 'Polype nasal'),
+    -> ('Ba', 41, 'Cancer du larynx');
+Query OK, 3 rows affected (0.019 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [orl_ia]> SELECT * FROM patients;
++----+--------+------+--------------------+
+| id | nom    | age  | diagnostic         |
++----+--------+------+--------------------+
+|  1 | Diallo |   45 | Sinusite chronique |
+|  2 | Sow    |   30 | Otite              |
+|  3 | Ndiaye |   52 | Polype nasal       |
+|  4 | Ba     |   41 | Cancer du larynx   |
++----+--------+------+--------------------+
+4 rows in set (0.001 sec)
+
+MariaDB [orl_ia]> SELECT * FROM patients
+    -> WHERE diagnostic LIKE '%larynx%';
++----+------+------+------------------+
+| id | nom  | age  | diagnostic       |
++----+------+------+------------------+
+|  4 | Ba   |   41 | Cancer du larynx |
++----+------+------+------------------+
+1 row in set (0.001 sec)
+
+MariaDB [orl_ia]> SELECT * FROM patients
+    -> ORDER BY age DESC;
++----+--------+------+--------------------+
+| id | nom    | age  | diagnostic         |
++----+--------+------+--------------------+
+|  3 | Ndiaye |   52 | Polype nasal       |
+|  1 | Diallo |   45 | Sinusite chronique |
+|  4 | Ba     |   41 | Cancer du larynx   |
+|  2 | Sow    |   30 | Otite              |
++----+--------+------+--------------------+
+4 rows in set (0.018 sec)
+
+MariaDB [orl_ia]> SELECT COUNT(*) AS total_patients
+    -> FROM patients;
++----------------+
+| total_patients |
++----------------+
+|              4 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [orl_ia]> DESCRIBE patients;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nom        | varchar(100) | YES  |     | NULL    |                |
+| age        | int(11)      | YES  |     | NULL    |                |
+| diagnostic | varchar(255) | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.046 sec)
+
+MariaDB [orl_ia]>
+
+
++++++++++++++++++++++++++++++++++++prochaine étape ++++++++++++++++++++++++++++++++++
+
+La prochaine étape naturelle pourrait être :
+
+* connecter Python (`mariadb` ou `sqlalchemy`)
+* utiliser DBeaver avec MariaDB
+* créer une API FastAPI
+* connecter Docker
+* construire une application ORL IA complète
+
+Par exemple, pour quitter MariaDB :
+
+```sql id="fns8ee"
+exit
+```
+
+SHELL(S) FERMER (exit) OU NON   PRECISER TOUJOURS ET DONNER L'INTEGRALITE des CODES
+++++++++++++++++++++++++D'accord pour continuer++++++++++++
+
+
+
+
+Oui 👍
+À ce stade précis, vous pouvez fermer proprement les 2 SHELLS.
+
+Mais IMPORTANT :
+dans SHELL1, `mysqld.exe --skip-grant-tables` a probablement été lancé au premier plan puis remplacé ensuite par le service Windows.
+Maintenant que le service normal MariaDB fonctionne, le mode spécial n’est plus nécessaire.
+
+# ORDRE EXACT
+
+## SHELL2 (MariaDB SQL)
+
+Vous êtes ici :
+
+```sql id="0dzdrk"
+MariaDB [orl_ia]>
+```
+
+Quittez proprement :
+
+```sql id="okbdcl"
+exit
+```
+
+
+++++++++++++++++++++++
+
+MariaDB [orl_ia]> DESCRIBE patients;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nom        | varchar(100) | YES  |     | NULL    |                |
+| age        | int(11)      | YES  |     | NULL    |                |
+| diagnostic | varchar(255) | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.046 sec)
+
+MariaDB [orl_ia]> exit
+Bye
+(base) PS C:\Program Files\MariaDB 12.3\bin>
+
+
+++++++++++++++++
+Vous revenez alors à PowerShell.
+
+Ensuite vous pouvez fermer SHELL2.
+
+---
+
+# SHELL1
+
+Vous êtes ici :
+
+```powershell id="zqth2l"
+(base) PS C:\Program Files\MariaDB 12.3\bin>
+```
+
+Vérifiez une dernière fois :
+
+```powershell id="h2g2em"
+Get-Service MariaDB
+```
+
+Vous devez voir :
+
+```text id="sl6w3u"
+Running
+```
+
+Cela signifie que MariaDB tourne comme service Windows normal.
+
+Vous pouvez alors fermer SHELL1.
++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+(base) PS C:\Program Files\MariaDB 12.3\bin> Get-Service MariaDB
+
+Status   Name               DisplayName
+------   ----               -----------
+Running  MariaDB            MariaDB
+
+
+(base) PS C:\Program Files\MariaDB 12.3\bin>
+
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++
+---
+
+# IMPORTANT POUR LA SUITE
+
+À partir de maintenant, pour utiliser MariaDB :+++++++++++++++++++++++++++++++++
+
+## Ouvrir PowerShell normal
+
+Puis :
+
+```powershell id="k4y35h"
+cd "C:\Program Files\MariaDB 12.3\bin"
+```
+
+Puis :
+
+```powershell id="hwd9ka"
+.\mariadb.exe -u root -p
+```
+
+Mot de passe :
+
+```text id="ll3hzi"
+root123
+```
+
+Puis :
+
+```sql id="w6b16g"
+USE orl_ia;
+```
+
+Puis :
+
+```sql id="zq41fd"
+SELECT * FROM patients;
+```
+
+---
+
+# IMPORTANT : le warning requests
+
+Ce warning :
+
+```text id="m6owk3"
+RequestsDependencyWarning
+```
+
+vient de votre environnement Python/Conda et NON de MariaDB.
+
+MariaDB fonctionne correctement.
+
+Nous pourrons corriger cela plus tard avec :
+
+```powershell id="y3zj8r"
+pip install --upgrade requests urllib3 charset_normalizer
+```
+
+mais ce n’est PAS urgent.
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+J'ai fermé les 2 SHELLS maintenant j'ai un SEUL SHELL ( SHELL 1) ci-Dessous
+
+
+
+(base) PS C:\Users\UTILISATEUR> cd "C:\Program Files\MariaDB 12.3\bin"
+(base) PS C:\Program Files\MariaDB 12.3\bin> .\mariadb.exe -u root -p
+Enter password: *******
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 4
+Server version: 12.3.2-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> USE orl_ia;
+Database changed
+MariaDB [orl_ia]> SELECT * FROM patients;
++----+--------+------+--------------------+
+| id | nom    | age  | diagnostic         |
++----+--------+------+--------------------+
+|  1 | Diallo |   45 | Sinusite chronique |
+|  2 | Sow    |   30 | Otite              |
+|  3 | Ndiaye |   52 | Polype nasal       |
+|  4 | Ba     |   41 | Cancer du larynx   |
++----+--------+------+--------------------+
+4 rows in set (0.033 sec)
+
+MariaDB [orl_ia]>
+
+
+++++++++++++++++++++++++++++++++++++++++++++++
+
+

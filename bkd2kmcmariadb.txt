@@ -1,0 +1,92 @@
+(base) PS C:\Users\UTILISATEUR\Documents> cd .\MariaDB*
+(base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026> dir
+
+
+    Répertoire : C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        29/05/2026     09:54             80 0_0_0_0_0_0_MariaDB_bkdkmCeven29mai2026.txt
+-a----        29/05/2026     09:52       92610560 mariadb-12.3.2-winx64.msi
+
+
+(base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026>
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Parfait 👍
+Vous avez téléchargé le fichier installateur `.msi`, mais MariaDB n’est pas encore installé.
+
+Le fichier important est :
+
+```text id="3dd88h"
+mariadb-12.3.2-winx64.msi
+```
+
+Maintenant :
+
+1. Ouvrez l’Explorateur Windows
+2. Double-cliquez sur :
+
+```text id="39cbyf"
+mariadb-12.3.2-winx64.msi
+```
+
+3. Suivez l’installation.
+
+Pendant l’installation :
+
+* Cliquez `Next`
+* Laissez les options par défaut
+* Quand on demande le mot de passe `root`, choisissez un mot de passe simple que vous retiendrez
+  Exemple :
+
+  ```text
+  root123
+  ```
+* Cochez :
+
+  * “Use UTF8”
+  * “Install as service”
+  * “Start MariaDB automatically”
+
+Puis terminez avec :
+
+```text id="n9zk4y"
+Install
+```
+
+Après installation, revenez dans PowerShell et testez :
+
+```powershell id="2zw9vi"
+mariadb --version
+```
+
+ou :
+
+```powershell id="z7y6vk"
+mysql --version
+```
+
+Puis :
+
+```powershell id="3z4f38"
+mariadb -u root -p
+```
+
+Il demandera le mot de passe choisi pendant l’installation.
+
+Ensuite nous pourrons :
+
+* créer des bases de données,
+* connecter Python,
+* utiliser Docker,
+* connecter DBeaver,
+* connecter FastAPI,
+* utiliser SQLAlchemy,
+* faire des APIs médicales ORL IA autour de MariaDB.
+
+
+

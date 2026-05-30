@@ -1,0 +1,214 @@
+EXACTEMENT OU????  OU C'est Le CODE COMPLET ACTUALISE de main.py
+
+
+# 🧠 ÉTAPE 1 — AJOUTER UN PATIENT (POST)
+
+Ajoute dans `main.py` :
+
+```python id="post1"
+from fastapi import FastAPI
+from pydantic import BaseModel
+import mariadb
+
+app = FastAPI(title="ORL IA API")
+
+class Patient(BaseModel):
+    nom: str
+    age: int
+    diagnostic: str
+
+def get_connection():
+    return mariadb.connect(
+        host="localhost",
+        user="root",
+        password="root123",
+        database="orl_ia"
+    )
+
+@app.post("/patients")
+def add_patient(p: Patient):
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute(
+        "INSERT INTO patients (nom, age, diagnostic) VALUES (?, ?, ?)",
+        (p.nom, p.age, p.diagnostic)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return {"message": "Patient ajouté ✔"}
+```
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+Parfait 👍 tu as raison de demander ça clairement.
+
+Je te donne **LE CODE COMPLET FINAL de `main.py`** (à copier-coller tel quel, sans mélange).
+
+---
+
+# ✅ 📌 OÙ METTRE LE CODE
+
+Dans ton projet :
+
+```text
+C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026
+```
+
+👉 fichier :
+
+```text
+main.py
+```
+
+---
+
+# 🚀 ✅ CODE COMPLET FINAL `main.py`
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+import mariadb
+
+app = FastAPI(title="ORL IA API")
+
+# =========================
+# CONNEXION DATABASE
+# =========================
+def get_connection():
+    return mariadb.connect(
+        host="localhost",
+        user="root",
+        password="root123",
+        database="orl_ia"
+    )
+
+# =========================
+# MODELE PATIENT
+# =========================
+class Patient(BaseModel):
+    nom: str
+    age: int
+    diagnostic: str
+
+# =========================
+# ROUTE HOME
+# =========================
+@app.get("/")
+def home():
+    return {"message": "API ORL IA active"}
+
+# =========================
+# GET ALL PATIENTS
+# =========================
+@app.get("/patients")
+def get_patients():
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM patients")
+    rows = cur.fetchall()
+    conn.close()
+
+    return [
+        {
+            "id": r[0],
+            "nom": r[1],
+            "age": r[2],
+            "diagnostic": r[3]
+        }
+        for r in rows
+    ]
+
+# =========================
+# ADD PATIENT (POST)
+# =========================
+@app.post("/patients")
+def add_patient(p: Patient):
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute(
+        "INSERT INTO patients (nom, age, diagnostic) VALUES (?, ?, ?)",
+        (p.nom, p.age, p.diagnostic)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return {"message": "Patient ajouté ✔"}
+```
+
+---
+
+# 🚀 🔥 ÉTAPE SUIVANTE (IMPORTANT)
+
+## 1. Arrêter serveur actuel
+
+Dans SHELL2 :
+
+```bash
+CTRL + C
+```
+
+---
+
+## 2. Relancer FastAPI
+
+```bash
+uvicorn main:app --reload
+```
+
+---
+
+# 🌐 TEST POST
+
+### URL :
+
+```
+POST http://127.0.0.1:8000/patients
+```
+
+### JSON :
+
+```json
+{
+  "nom": "Fall",
+  "age": 50,
+  "diagnostic": "Sinusite"
+}
+```
+
+---
+
+# 🎯 CE QUE TU AS MAINTENANT
+
+✔ API ORL complète
+✔ GET patients
+✔ POST patients
+✔ MariaDB connecté
+✔ structure médicale propre
+
+---
+
+# 🚀 PROCHAINE ÉTAPE (TRÈS IMPORTANTE)
+
+Ensuite on passe à :
+
+## 🔥 129 patients automatiques (dataset ORL complet)
+
+## 🔥 statistiques médicales
+
+## 🔥 IA prédictive (cancer / sinusite / allergie)
+
+---
+
+👉 Dis-moi juste :
+
+**“POST OK”**
+
+et je t’envoie le module génération 129 patients + IA médicale 🚀
+

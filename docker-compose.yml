@@ -1,0 +1,68 @@
+services:
+
+  # ======================
+  # MARIA DB (ORL IA)
+  # ======================
+  mariadb:
+    image: mariadb:11.4
+    container_name: orl_mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: orl_ia
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_orl:/var/lib/mysql
+      - ./db_orl/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # ======================
+  # ORACLE DB
+  # ======================
+  oracle-db:
+    image: gvenzl/oracle-xe:21-slim
+    container_name: oracle_db
+    environment:
+      ORACLE_PASSWORD: oracle
+    ports:
+      - "1523:1521"
+
+  # ======================
+  # ORL API (MariaDB)
+  # ======================
+  api_orl:
+    build: ./api_orl
+    container_name: api_orl
+    ports:
+      - "8002:8000"
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+
+  # ======================
+  # ORACLE API
+  # ======================
+  api_oracle:
+    build: ./api_oracle
+    container_name: api_oracle
+    ports:
+      - "8001:8000"
+    depends_on:
+      - oracle-db
+    env_file:
+      - .env
+
+  # ======================
+  # DASHBOARD GLOBAL
+  # ======================
+  dashboard:
+    build: ./streamlit_app
+    container_name: dashboard_global
+    ports:
+      - "8502:8501"
+    depends_on:
+      - api_orl
+      - api_oracle
+
+volumes:
+  db_orl:

@@ -1,0 +1,251 @@
+ETATS ACTUELS de mes 2 SHELLS en Mode ADMINISTRATEUR. PRECISER Les SHELLS pour CONTINUER.
+
+SHELL1
+
+C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\requests\__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (7.4.3)/charset_normalizer (3.4.7) doesn't match a supported version!
+  warnings.warn(
+(base) PS C:\WINDOWS\system32> Stop-Service MariaDB
+(base) PS C:\WINDOWS\system32> Get-Service MariaDB
+
+Status   Name               DisplayName
+------   ----               -----------
+Stopped  MariaDB            MariaDB
+
+
+(base) PS C:\WINDOWS\system32> cd "C:\Program Files\MariaDB 12.3\bin"
+(base) PS C:\Program Files\MariaDB 12.3\bin> .\mysqld.exe --skip-grant-tables
+
+
+
+SHELL2
+
+C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\requests\__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (7.4.3)/charset_normalizer (3.4.7) doesn't match a supported version!
+  warnings.warn(
+(base) PS C:\WINDOWS\system32> cd "C:\Program Files\MariaDB 12.3\bin"
+(base) PS C:\Program Files\MariaDB 12.3\bin> .\mariadb.exe
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 12.3.2-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++PARFAIT+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+Parfait 👍
+Tout est EXACTEMENT correct.
+
+* SHELL1 = serveur MariaDB lancé sans sécurité
+* SHELL2 = console SQL connectée
+
+Continuez UNIQUEMENT dans SHELL2 pour le moment.
+
+Dans SHELL2, tapez exactement :
+
+```sql id="2u4lmv"
+FLUSH PRIVILEGES;
+```
+
+Puis :
+
+```sql id="qdq0gr"
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
+```
+
+Puis :
+
+```sql id="y22mpm"
+FLUSH PRIVILEGES;
+```
+
+Puis vérifiez :
+
+```sql id="i0ww9q"
+SELECT user, host FROM mysql.user;
+```
+
+Puis :
+
+```sql id="gx4bth"
+exit
+```
+
+ENSUITE :
+
+## Retour dans SHELL1
+
+Arrêtez le mode spécial :
+
+```text id="j0h2yw"
+Ctrl + C
+```
+
+Puis dans SHELL1 :
+
+```powershell id="suj44s"
+Start-Service MariaDB
+```
+
+Puis vérifiez :
+
+```powershell id="z6l1q4"
+Get-Service MariaDB
+```
+
+Vous devez voir :
+
+```text id="g3p1xq"
+Running
+```
+
+ENSUITE :
+
+## Test final dans SHELL2
+
+Reconnectez-vous :
+
+```powershell id="c5vjlwm"
+.\mariadb.exe -u root -p
+```
+
+Mot de passe :
+
+```text id="i4j0ee"
+root123
+```
+
+Puis :
+
+```sql id="8qspw7"
+SHOW DATABASES;
+```
+
+Copiez-moi :
+
+* le résultat du `ALTER USER`
+* puis le résultat final de `SHOW DATABASES;`.
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ETATS des 2 SHELLS+++++++++++++++++++++++++++++++++++++++++++++++
+
+ETATS des 2 SHELLS
+
+SHELL1
+
+C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\requests\__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (7.4.3)/charset_normalizer (3.4.7) doesn't match a supported version!
+  warnings.warn(
+(base) PS C:\WINDOWS\system32> Stop-Service MariaDB
+(base) PS C:\WINDOWS\system32> Get-Service MariaDB
+
+Status   Name               DisplayName
+------   ----               -----------
+Stopped  MariaDB            MariaDB
+
+
+(base) PS C:\WINDOWS\system32> cd "C:\Program Files\MariaDB 12.3\bin"
+(base) PS C:\Program Files\MariaDB 12.3\bin> .\mysqld.exe --skip-grant-tables
+(base) PS C:\Program Files\MariaDB 12.3\bin> Start-Service MariaDB
+(base) PS C:\Program Files\MariaDB 12.3\bin> Get-Service MariaDB
+
+Status   Name               DisplayName
+------   ----               -----------
+Running  MariaDB            MariaDB
+
+
+(base) PS C:\Program Files\MariaDB 12.3\bin>
+
+
+
+
+
+
+SHELL2
+
+C:\Users\UTILISATEUR\miniconda3\Lib\site-packages\requests\__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (7.4.3)/charset_normalizer (3.4.7) doesn't match a supported version!
+  warnings.warn(
+(base) PS C:\WINDOWS\system32> cd "C:\Program Files\MariaDB 12.3\bin"
+(base) PS C:\Program Files\MariaDB 12.3\bin> .\mariadb.exe
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 12.3.2-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [(none)]> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123';
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [(none)]> SELECT user, host FROM mysql.user;
++-------------+-----------------+
+| User        | Host            |
++-------------+-----------------+
+| PUBLIC      |                 |
+| root        | 127.0.0.1       |
+| root        | ::1             |
+| root        | desktop-eqgunkh |
+| mariadb.sys | localhost       |
+| root        | localhost       |
++-------------+-----------------+
+6 rows in set (0.026 sec)
+
+MariaDB [(none)]> exit
+Bye
+(base) PS C:\Program Files\MariaDB 12.3\bin> .\mariadb.exe -u root -p
+Enter password: *******
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 12.3.2-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| test               |
++--------------------+
+5 rows in set (0.022 sec)
+
+MariaDB [(none)]>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

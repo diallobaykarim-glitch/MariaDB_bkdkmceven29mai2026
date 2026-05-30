@@ -1,0 +1,352 @@
+SHELL ACTIF ON NE PEUT PAS TAPER exit
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+OK 👍 c’est normal dans ton cas.
+
+Tu es **dans le client MariaDB interactif**, donc `exit` peut ne pas fonctionner si tu es bloqué par une commande ou un état bizarre.
+
+---
+
+# 🚨 SOLUTION PROPRE (FORCÉE MAIS SÉCURISÉE)
+
+Tu es ici :
+
+```sql
+MariaDB [orl_ia]>
+```
+
+## 👉 Solution 1 (standard)
+
+Essaye EXACTEMENT :
+
+```sql id="ex1"
+exit;
+```
+
+ou :
+
+```sql id="ex2"
+quit;
+```
+
+---
+
+## 👉 Solution 2 (si ça ne marche pas)
+
+Appuie sur :
+
+```text id="ex3"
+Ctrl + C
+```
+
+👉 ça coupe immédiatement la session SQL
+
+---
+
+## 👉 Solution 3 (ULTIME si bloqué)
+
+Ferme simplement la fenêtre PowerShell.
+
+👉 Aucun risque car :
+
+* le service MariaDB Windows tourne déjà correctement
+* tes données sont sauvegardées dans MariaDB
+
+---
+
+# ⚠️ IMPORTANT
+
+Ne mélange plus :
+
+* SQL (MariaDB prompt)
+* PowerShell
+* Python
+
+---
+
+# 🚀 APRÈS SORTIE
+
+Quand tu es revenu ici :
+
+```text id="p1"
+(base) PS C:\Users\UTILISATEUR>
+```
+
+on fera proprement :
+
+```powershell id="p2"
+cd Documents\MariaDB_bkdkmCeven29mai2026
+python -m venv env
+.\env\Scripts\activate
+```
+
+---
+
+👉 Dis-moi juste :
+
+* si `exit;` marche
+* ou si tu as utilisé Ctrl+C
+
+et je te remets dans un environnement propre pour Python + IA ORL.
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+je suis ici on ne peut pas taper
+MariaDB [orl_ia]> SELECT * FROM patients;
++----+--------+------+--------------------+
+| id | nom    | age  | diagnostic         |
++----+--------+------+--------------------+
+|  1 | Diallo |   45 | Sinusite chronique |
+|  2 | Sow    |   30 | Otite              |
+|  3 | Ndiaye |   52 | Polype nasal       |
+|  4 | Ba     |   41 | Cancer du larynx   |
++----+--------+------+--------------------+
+4 rows in set (0.033 sec)
+
+MariaDB [orl_ia]> cd "C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026"
+    -> python -m venv env
+    -> .\env\Scripts\activate
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Parfait 👍 je vois exactement le problème.
+
+Tu es dans le **prompt SQL de MariaDB** :
+
+```text
+MariaDB [orl_ia]>
+```
+
+👉 Donc **tu ne peux PAS taper** :
+
+* `cd`
+* `python`
+* `.\env\Scripts\activate`
+
+❌ Ce ne sont PAS des commandes SQL
+✔ elles sont Windows / Python
+
+---
+
+# 🚨 CE QUI S’EST PASSÉ
+
+MariaDB attend du SQL, donc il transforme tout en continuation :
+
+```text
+->
+```
+
+---
+
+# 🔥 SOLUTION IMMÉDIATE (OBLIGATOIRE)
+
+## 👉 1. Quitter MariaDB FORCÉMENT
+
+Appuie maintenant sur :
+
+```text id="fix1"
+Ctrl + C
+```
+
+---
+
+## 👉 2. Si ça ne marche pas → tape :
+
+```sql id="fix2"
+quit
+```
+
+ou :
+
+```sql id="fix3"
+exit
+```
+
+---
+
+## 👉 3. Si bloqué encore (OK aussi)
+
+➡️ ferme simplement la fenêtre PowerShell
+
+⚠️ Aucun risque :
+
+* ton serveur MariaDB Windows reste actif
+* tes données sont déjà enregistrées dans MariaDB
+
+---
+
+# 🎯 OBJECTIF
+
+Tu dois revenir ici :
+
+```text id="ok1"
+(base) PS C:\Users\UTILISATEUR>
+```
+
+---
+
+# 🚀 APRÈS ÇA (IMPORTANT)
+
+On va faire PROPREMENT :
+
+```powershell id="next1"
+cd "C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026"
+python -m venv env
+.\env\Scripts\activate
+```
+
+---
+
+# ⚠️ RÈGLE À RETENIR
+
+Dans MariaDB :
+
+✔ SELECT
+✔ INSERT
+✔ UPDATE
+
+❌ PAS de cd
+❌ PAS de python
+❌ PAS de activate
+
+---
+
+👉 Fais maintenant :
+
+* Ctrl + C
+
+et dis-moi juste :
+
+**“sorti MariaDB”**
+
+Je t’enchaîne directement sur Python + IA ORL sans erreur.
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Ctrl-C -- exit!
+ERROR: Unknown command '\S'.
+ERROR: Unknown command '\a'.
+    -> exitexit
+    ->
+(base) PS C:\Program Files\MariaDB 12.3\bin>
+
+J'ai fermé le fichier sql8410.tmp
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+Parfait 👍 tu es **enfin sorti de MariaDB**.
+
+Le message :
+
+```text
+(base) PS C:\Program Files\MariaDB 12.3\bin>
+```
+
+👉 confirme que tu es revenu dans **PowerShell normal**
+👉 donc le mode SQL est terminé
+
+---
+
+# ⚠️ CE QUI S’EST PASSÉ
+
+* `Ctrl + C` a interrompu MariaDB correctement
+* les erreurs `Unknown command` sont normales (tu étais encore dans le parser SQL)
+* `sql8410.tmp` n’est pas important → tu l’as bien fermé 👍
+
+---
+
+# 🚀 ÉTAT ACTUEL
+
+✔ MariaDB fonctionne en service Windows
+✔ base `orl_ia` intacte
+✔ données patients OK
+✔ tu es revenu dans PowerShell normal
+
+---
+
+# 👉 PROCHAINE ÉTAPE (IMPORTANT)
+
+Maintenant on passe au **vrai workflow propre Python**
+
+## 1. Aller dans ton dossier projet
+
+```powershell
+cd "C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026"
+```
+
+---
+
+## 2. Créer environnement Python
+
+```powershell
+python -m venv env
+```
+
+---
+
+## 3. Activer environnement
+
+```powershell
+.\env\Scripts\activate
+```
+
+👉 tu dois voir :
+
+```text
+(env) (base) PS ...
+```
+
+---
+
+## 4. Installer dépendances
+
+```powershell
+pip install mariadb pandas
+```
+
+---
+
+# 🎯 OBJECTIF DE CETTE ÉTAPE
+
+Tu vas pouvoir :
+
+* connecter Python à MariaDB
+* lire tes patients ORL
+* préparer API médicale IA
+
+---
+
+# ⚠️ IMPORTANT (à retenir)
+
+* MariaDB = SQL uniquement
+* PowerShell = commandes Windows
+* Python = scripts IA
+
+---
+
+# 🚀 PROCHAINE ÉTAPE APRÈS ÇA
+
+On fera :
+
+👉 script Python ORL propre
+👉 puis FastAPI médical
+👉 puis modèle IA prédictif
+
+---
+
+👉 Dis-moi juste :
+
+**“env créé”** ou colle ton prochain écran
+et je continue avec toi étape par étape sans erreur.

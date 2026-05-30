@@ -1,0 +1,53 @@
+CREATE DATABASE IF NOT EXISTS orl_ia;
+USE orl_ia;
+
+CREATE TABLE IF NOT EXISTS patients (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    age INT,
+    sexe INT,
+    tabac INT,
+    alcool INT,
+    obstruction_nasale INT,
+    rhinorrhee INT,
+    epistaxis INT,
+    anosmie INT,
+    polypose_nasale INT,
+    douleur_faciale INT,
+    cancer VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO patients (age, sexe, tabac, alcool, obstruction_nasale, rhinorrhee, epistaxis, anosmie, polypose_nasale, douleur_faciale, cancer) VALUES
+(45, 1, 1, 0, 1, 0, 0, 1, 0, 0, 'Allergie naso-sinusienne'),
+(52, 0, 1, 1, 0, 1, 0, 0, 1, 1, 'Polypose nasale'),
+(38, 1, 0, 0, 0, 0, 1, 1, 0, 0, 'Rhinite allergique'),
+(61, 0, 1, 1, 1, 0, 0, 0, 0, 1, 'Cancer sinus maxillaire'),
+(48, 1, 0, 1, 1, 1, 0, 1, 1, 0, 'Polyadénome'),
+(73, 1, 1, 1, 1, 1, 1, 1, 0, 1, 'Cancer cavité nasale'),
+(42, 0, 0, 0, 0, 1, 0, 0, 1, 0, 'Rhinite vasomotrice'),
+(55, 1, 1, 0, 1, 0, 1, 0, 0, 1, 'Sinusite chronique'),
+(36, 0, 0, 1, 1, 1, 0, 1, 0, 0, 'Déviation septale'),
+(67, 1, 1, 1, 0, 1, 1, 1, 1, 1, 'Cancer etmoïde'),
+(44, 0, 1, 0, 0, 0, 0, 0, 1, 0, 'Polypose nasale'),
+(58, 1, 0, 1, 1, 0, 1, 1, 0, 1, 'Sinusite aiguë'),
+(39, 1, 1, 1, 1, 1, 0, 0, 1, 0, 'Allergie naso-sinusienne'),
+(70, 0, 1, 0, 1, 1, 1, 0, 0, 1, 'Cancer sinus maxillaire'),
+(46, 1, 0, 0, 0, 1, 0, 1, 1, 0, 'Rhinite non-allergique'),
+(53, 0, 1, 1, 1, 0, 0, 1, 0, 1, 'Polypose nasale'),
+(41, 1, 0, 1, 0, 1, 1, 0, 0, 0, 'Sinusite chronique'),
+(65, 1, 1, 0, 1, 1, 0, 1, 1, 1, 'Cancer cavité nasale'),
+(37, 0, 0, 0, 1, 0, 0, 0, 0, 0, 'Rhinite allergique'),
+(59, 1, 1, 1, 1, 1, 1, 1, 1, 0, 'Sinusite polypeuse'),
+(47, 0, 1, 0, 0, 1, 0, 1, 0, 1, 'Déviation septale'),
+(72, 1, 0, 1, 1, 0, 1, 0, 1, 1, 'Cancer etmoïde'),
+(43, 1, 1, 1, 0, 1, 0, 0, 0, 0, 'Allergie naso-sinusienne'),
+(56, 0, 0, 0, 1, 1, 1, 1, 1, 0, 'Polypose nasale'),
+(40, 1, 1, 0, 0, 0, 0, 1, 0, 1, 'Sinusite aiguë'),
+(68, 1, 0, 1, 1, 1, 0, 0, 1, 1, 'Cancer sinus maxillaire'),
+(50, 0, 1, 1, 1, 0, 1, 1, 0, 0, 'Rhinite non-allergique'),
+(35, 1, 0, 0, 0, 1, 0, 0, 1, 0, 'Polypose nasale'),
+(62, 1, 1, 0, 1, 1, 1, 1, 0, 1, 'Sinusite chronique'),
+(45, 0, 0, 1, 0, 0, 0, 0, 0, 0, 'Allergie naso-sinusienne'),
+(54, 1, 1, 0, 1, 1, 0, 1, 1, 1, 'Cancer cavité nasale'),
+(49, 1, 0, 1, 1, 0, 1, 0, 0, 0, 'Rhinite allergique'),
+(69, 0, 1, 1, 0, 1, 1, 1, 1, 1, 'Cancer etmoïde');

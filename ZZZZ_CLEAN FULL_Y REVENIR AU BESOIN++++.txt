@@ -1,0 +1,208 @@
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026> docker-compose down -v
+[+] down 5/5
+ ✔ Container orl_dashboard_orlia               Removed                                                                                                  0.1s
+ ✔ Container orl_api_orlia                     Removed                                                                                                  0.1s
+ ✔ Container orl_mariadb                       Removed                                                                                                  0.1s
+ ✔ Network mariadb_bkdkmceven29mai2026_default Removed                                                                                                  0.3s
+ ✔ Volume mariadb_bkdkmceven29mai2026_db_data  Removed                                                                                                  0.0s
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026> docker system prune -a
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all images without at least one container associated to them
+  - all build cache
+
+Are you sure you want to continue? [y/N] Y
+Deleted Containers:
+8b736a76c143dbc50b67e8ccc56a8cc67c99081da3c9619ed2d3dce94afb3713
+2d932a23c0d254958f853ca3ee042fd9401027c31c9dc08b06a6cc788cad1f8c
+60269684c8a33490df11a703772449a14da3fc831dfd702ae2327d65d7f69edc
+b2ef594024fc3cc768f12908643aa0589c22c2d770462ec5538f09e708a4a4b5
+200d7650dec04721ed4918f3f92f626a1e79537fb6b5ce9bf885773d41016227
+6c44be099956d9763dc2ecb2e6e15e4eeb3d50b7c51461744b8f8e0829679a97
+3fe3eeb787f6787467aaf7ebd1302195f3690cbe949eca382c47e4803fc779e3
+793cd67a4ac43cabe4e49d106cd32116120cfac6a61566a39d98f60679c617b1
+4b495233e423119829b3e5d9cfad3021cabccc9046a2fd2e984ee21a3cc4beac
+cf34e277d4b9ca0a5dee43069a09080de96b4456a97e4575b749d3c992ef18a5
+09abcae6d1086d505f7ff846579b4b7b01875f65826da44450bb19b2966dd494
+d15a53cb49516e298eb72fb5b4cf07ae628de9d0cf862b3804bc7787fee55931
+5f303aa2b84deaebad9829b811d10d11903f3cc017296f3244824c0c2638e5d2
+9eb31684603dd0488fdec00dcde5251045cab4df478ad1cff2b7bd9b763a6a10
+3dd8c4cbd3c55357fa192023b12d4c5519476e2383daaf55b0759bdc5ca61944
+
+Deleted Networks:
+dbbrowser_dbdesigneretdbeaver_default
+oraclebkd3kmcplateformeoraclesam9mai2026_app-network
+javabkdkmcjeu28mai2026openjdk_default
+lanceruneextensiondansunterminalshell_default
+
+Deleted Images:
+untagged: gvenzl/oracle-xe:21-slim
+deleted: sha256:ecdf4302ac3d134e1bac5ef6e0c223c2d0f4d4d2b6d551aa79b2346f1ab8f792
+untagged: dbbrowser_dbdesigneretdbeaver-api:latest
+deleted: sha256:245b6b1e4cd552f302b79a1c3da002d14f5ac3e2da2a1c2e8c9e42f301d1532a
+deleted: sha256:6dd83363abeae4bf5d33559e8fdd5bfe97713f4fc9e9ada93341f235ce84990f
+deleted: sha256:174c032e21985992b9f88e4d397007b51eecc26a2eb600e2d5deac43b62632bf
+untagged: oraclebkd3kmcplateformeoraclesam9mai2026-api:latest
+deleted: sha256:950ce77d26db9b1f9b04ebd671a5afdb5309df9a5be47fa29442ad5ef4b4ae6b
+deleted: sha256:417bd028df27edf024f87d11d36682883f2bdeff42aec17363f58111d34febc2
+deleted: sha256:5e98841b9d1dfb82e6b3f4eb2751ac04554c875b35b275152b30d4d71d79ae59
+untagged: docker/desktop-docker-debug-service:0.0.47
+deleted: sha256:27cd5ec6108982b025f9f426b1aa3b5eb0a2cbbd677e73de337a4a41f0c4bce2
+deleted: sha256:4a00db5a07ad8697f10740015e877cbfb4b22768e81ce1fd1e703cda21e506ca
+deleted: sha256:398e74ee9de2e2cc4d4ec3883bc40449d56b96b9ca29117c9bc307697ef4b309
+untagged: javabkdkmcjeu28mai2026openjdk-java-client:latest
+deleted: sha256:95333f82d79287413cd5c92a0097a54783eb5b37dbcc83d986698152316e3b28
+deleted: sha256:b0b38433f2b6b8e84a209f1c5f36d2d690aab22a2f0634a79b97358f8e690924
+deleted: sha256:119e7d6cf391ebc79dfb88028cea0e14c1c9040c57f5eb25fff0f40c47f013a6
+untagged: mariadb_bkdkmceven29mai2026-streamlit:latest
+deleted: sha256:45c72170a371d9fb55cf15ef5daa403298b56bfc6b81287e39cf8d26460fe370
+deleted: sha256:cb04141a6db56bd113494b71e63b6fb0fed8d6660a0fb81c9dd0aac4c4209cf1
+deleted: sha256:fa3eb0fdc104054c37e1deaf3365a464999b6ca9f65c318d529a81b68d1581d2
+untagged: nginx:latest
+deleted: sha256:06aa3d7be10bc6307990c81bdca075793132e9163391abc370c015e344e23128
+deleted: sha256:2f23d90e8640913ec33eed833e42c9d113fc3712c7cbc1bcc10dc16c22da7d79
+deleted: sha256:c1db6764130034f3c8abae5a43ba616af95485a08eb98daadfdedbcaf9ebc80b
+untagged: oraclebkd3kmcplateformeoraclesam9mai2026-dashboard:latest
+deleted: sha256:520dd204423627ccac6bde7ccec2940ee314f595a89e31dc3ab2e209cf476e0a
+deleted: sha256:1d1754ef1f5db79a3ff1291c9f369866be6b1e499c658ed2f87da0beb456573f
+deleted: sha256:af7acca0171bd03659c9d3a284c44c9cb4bedb896d6b02dc7f38bc9dbf34e192
+untagged: phpmyadmin:latest
+deleted: sha256:7dfd52c452049bf077f5ae6d46324f5f33ea0130c16b958d9821aff5c6f812ef
+deleted: sha256:9faaeda3808ff9b5d48d2a2925a7dd99d72ddb38fcba2690f2af6e6a92dee40a
+deleted: sha256:cae4c6f40e7d2dccbb54e07b88fa1b469417925b115d76e8dec031e41d426177
+untagged: container-registry.oracle.com/database/express:latest
+deleted: sha256:dcf137aab02d5644aaf9299aae736e4429f9bfdf860676ff398a1458ab8d23f2
+untagged: javabkdkmcjeu28mai2026openjdk-python-api:latest
+deleted: sha256:a77cf46b660f217e4cd55c29c25f20771be343db563be115ce8cbd9c95cd29c5
+deleted: sha256:a33e340c6c2746774086b470393dc5e04d3c70157190378ae6df4590a30a7b1e
+deleted: sha256:df777689574faea365ff6bc9e144dd95059cb0701028159b0ec77251f0ea45ee
+untagged: mariadb:11.4
+deleted: sha256:ad0e77348b9d653cbfacb865089bc4d7d3156ee4309f25ec67898f12cd57ef2f
+deleted: sha256:8631b0545d4d6069d0c9ffa2bb5f71ed414c55a9195de8746b14065d7ae627a5
+deleted: sha256:3fc341a8fef3eefbd388b151dee1bbee61afb2974ab705ee9965994303d3d369
+untagged: mariadb_bkdkmceven29mai2026-api:latest
+deleted: sha256:a4f3807ebfdda107886febf7abad9f8c753dc6f9184a38b82b4c2fcdbb1ad79a
+deleted: sha256:eb1e79ca11d9251df5480a47186fafdb894ce430368cfc4746c964a4b6d0b19a
+deleted: sha256:760acea90f4298c05d5d80e6d0c82da48dd975805df728817cdc7d10e5fc26dd
+untagged: mariadb_bkdkmceven29mai2026-dashboard:latest
+deleted: sha256:b88c9226514b85bccd329be03d5b4546b820ea54a7637f4ccb04cbf2a42b216c
+deleted: sha256:1ef6065a18b4db596232382dac56ccb00be4d554865ccec31917813c2a713990
+deleted: sha256:068013f395dad79d82091b55915bf84a69a940cef92e2bb701813811d11b50ec
+untagged: mysql:8.0
+deleted: sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b
+deleted: sha256:62fb722c78b24245ddff1796a0fcee4a49cc5b87e0aaaf20c92d1da9e0a2497b
+deleted: sha256:fed8ae184a51c4b7d9cc23dd38a0a1bed605380eb6f11e0f45dd08c2db084d0a
+untagged: testdocker:latest
+deleted: sha256:cd9ee117c4a1572adf98d0311b0692aa74c945d0d0c2a09be107cad07ec968ed
+deleted: sha256:7f7bd7c1fcc90ddb22a467a20780c39ca8af7dde5a9db8f2a3f611bcaab3ffce
+deleted: sha256:37c17161f53916d0dfa9f47c6d6be96127e1e9e381835fab7cb3b0a50a733091
+untagged: dtestops/mysql:5.7
+deleted: sha256:fe90fd9d2a0e87fde735f4819bd7b1062cda46e32b89efe378b6e0ee8bd65860
+untagged: dbbrowser_dbdesigneretdbeaver-streamlit:latest
+deleted: sha256:ee4556d25b511c5354513e0d9f73939aea7f8e57461ce6a1ce9f10bea4cde35d
+deleted: sha256:47ef24e79db8c05c65183873129f30ee515e5299aa34d68aa40e60f1dff118b3
+deleted: sha256:c4c1a7e3d7d861f63628abee3e1575bde5461a5120ac7b36c6494e68b648ddd8
+
+Deleted build cache objects:
+61ylq973wbr6epm64bmqwfde7
+0ajdus4rlhi3gqkprrbv9mrkh
+6wojxwmgsfnc8e1jrylvi43bh
+aoe6fbhb65d4jrcfvclryfyqj
+w9royxb7yzgjs4ko9nqevwdca
+0h8mkz8lhiywlfnezavh70r30
+a7ssvl1a825kvos82nndbatb0
+q3cr3c285vt310egjyjqx5mij
+md3vnjjn9y40zyhfrkfoslx05
+d5ywkt60sy5rnfs45t490qto9
+rkqnmqgbvwtqo5qbhsce62k0m
+rp295t5qgcfe8588z5gx7i845
+vqf7mz5g3d9gkl7lrsi5rb9nv
+n9zntt3oqg2cui7hn319buj80
+x5ij9hybjkwsz4pw05ed2jo07
+lb0frqghfzq3dqy1fkh044349
+tvixnicqhq7y3xjldo7pi909f
+3h80lq6epr7kb3b2738058fld
+qwc5srn1kzy5noljzlqhflhy8
+msen7q8c5k3hgmruumx91tsz6
+xljmasmbu69wcha33s4zx6oc8
+ts4i0nyvks9fm8ct5k8fcszms
+s8fhvoar0h9jcpe60xu4fyaot
+vgi78rsk7qqud5v3fn4chu9bm
+yyh7ebw3q4cfzqh316fzp5z05
+1oy499zizvcvdkdo52uswfuue
+628sx0j0qcvjubegux342m11h
+jh2nhnnxpffp6osj9yh7qt5ro
+npb76zcawuajdtlehi63a2mx7
+xfmq7x1uj8l8j5flihkql98jr
+tadwfl3kre8nhawqsapqj9bqz
+1kj1wf4b151su6wl9erv274eh
+uvc6bm5yp1k43z9r508vxnky0
+pcql7rp1cure3cen5vmna7g43
+pa0ql1sevuf3wl8jg4ukikivb
+kvfhsddk9cleg6iw16b2grlo7
+ynf54kgyaqlfj9s60cdqa8fzm
+z1qqs6k2sibvmsw2xnp6gyuwl
+sq3gy6f5oxe0phc7syvm7f43h
+j4guliq90aecpts9lfgv9bfui
+306z2ss2c1zczxene5oubxjb5
+einxodnagxxemlgzh2x88d1wo
+oygruz4nrpj4k9ml5wuykwaw2
+8vx72stg0ax4uce1z78f3xlkr
+wheww427vuz7mopno5jftiarf
+8cbg33fzq7fr8bqwq0wk9hhkd
+386jf9a2ajikpy0rasrmshdyt
+o7q6teq047f2rb1sr2ep0gagx
+k7kbboebn3t648vc5xuyb850q
+i1ozw5g3d4hafwqgecuxupzg7
+2lmj5rwod3wxj9xd1p8855ajq
+l2rstmsj4aem5vnqjkbf7xu5w
+q778tf2ut29ok69w0hkhe3n1k
+qal7i7b535z6j6pvcdcdvyr4r
+169fz2waz9zd2k66b0xuc0rhq
+4projygad2tj4pr95duwax2ep
+k61wpq5ougb31mrbs32dm67mm
+s85tpjvkd4ymroggkdyqknoxo
+8tkv1yx790ie032g957dsf10n
+v72yqffr0ujxv10xvtrwtmv0y
+mw96sxyqvdeiw0oy9cycb16bw
+o2ljkt6n7egjfkrjigvvuipmw
+zv6hrdul5hnf430lcw227c0dp
+oy387o3ua64zkuhio67pjy7ks
+5bzkeyblo5qzzu0t1cm1qsyxs
+rnytwmjznmy0h5g90mckzmw9c
+mm70uef0iy7mkl2vdhrha7sy1
+zc7fnascoos8xtehp17u7j2zk
+yovyivzc64tg3jab97qnqtelo
+xwr0t1h7cymkmtdvxe57rm18c
+unx1vbjnn3cs3gtyz6qcgkbq8
+tnlhwq7vvtbkl9k55zizdmhcx
+jddak17gdrtyna0tcswsjei73
+n3waamxqyi2hfkvtoedrpqkfc
+w4wub9kdrbynev6csfu3gc9j1
+m14i8sclukkekw7b08sa2w33a
+iwyuuxo6yh4ddap4v78500tjv
+q47b09mj56z4o9l64xk3tort9
+xalgr4ir26youe8q4jhkwzbnd
+dvih6pykhx3hskzkg2atc2lef
+vxsietjs3djna5imwntnm3msi
+p478h982yb5iijdxju4qmfejk
+c3bs1qonson8rzl767hai81qi
+ypu8c2yqa6qxvakdvo19vst8t
+uru9ro0rq0u5qlctyqf327bxx
+d668eoayodlfh3wwjv7p5j3lu
+i12hxrm45kr5tcxqthpa89svn
+gbmyqh0r8l8j0gmheasnftlxj
+zmpiiiw7z4lstzqte9cvdiz80
+vx2t3ced43rxmq5rr6cri7hnr
+mqn2kzxuysf21vvt5ir7msowa
+w1muz7nhmdgbqlf0c1ef9q6fq
+lb9km4roum4nl8mey7uw5d876
+9dmtx1hiocktfvx3xtdlh8xgp
+fjh36fvlxsfqe1tcih2vwmvrw
+nlwbor1p0ex41x6hfuvk65vlg
+zq82l42sznx1ux5zlxgh44pz3
+zotvzs5zglidaxp3cwyrhi3le
+
+Total reclaimed space: 16.21GB
+(env) (base) PS C:\Users\UTILISATEUR\Documents\MariaDB_bkdkmCeven29mai2026>

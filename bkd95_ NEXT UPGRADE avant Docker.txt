@@ -1,0 +1,295 @@
+NEXT UPGRADE
+
+PRECISER LE(S) SHELL(S)
+DONNER INTEGRALITE DES CODES
+
+apres on FAIT DOCKER
+
++++++++++++++++++++++++++++++++++++NEXT UPGRADE avant Docker+++++++++++++++++++++++++++++++++++
+
+
+Parfait 👍 on passe en **NEXT UPGRADE propre (niveau système hospitalier)** avant Docker.
+
+---
+
+# 🧠 ÉTAT ACTUEL
+
+Tu as déjà :
+
+* API FastAPI ORL ✔
+* IA entraînée (joblib) ✔
+* MariaDB opérationnelle MariaDB ✔
+* dataset 129 patients ✔
+
+---
+
+# 🚀 NEXT UPGRADE (IMPORTANT)
+
+On ajoute 3 améliorations réelles :
+
+## 🔥 1. Score de risque ORL (cancer risk score)
+
+## 🔥 2. endpoint `/risk`
+
+## 🔥 3. API plus “clinique” (interprétation médicale)
+
+---
+
+# 🧠 NOMBRE DE SHELLS
+
+## 🟢 SHELL 1
+
+```text
+FastAPI (uvicorn)
+```
+
+## 🟢 SHELL 2
+
+```text
+test curl / navigateur / Python
+```
+
+---
+
+# 🚀 ÉTAPE 1 — MODIFIER `main.py` COMPLET
+
+👉 REMPLACE TOUT ton `main.py` par ceci :
+
+---
+
+## 📌 CODE COMPLET
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+import mariadb
+import joblib
+
+app = FastAPI(title="ORL IA API - NEXT LEVEL")
+
+# =========================
+# MODELE
+# =========================
+model = joblib.load("model_orl.pkl")
+encoder = joblib.load("encoder_orl.pkl")
+
+# =========================
+# DB
+# =========================
+def get_connection():
+    return mariadb.connect(
+        host="localhost",
+        user="root",
+        password="root123",
+        database="orl_ia"
+    )
+
+# =========================
+# INPUT
+# =========================
+class PatientInput(BaseModel):
+    age: int
+    sexe: int
+    obstruction_nasale: int
+    rhinorrhee: int
+    epistaxis: int
+    anosmie: int
+    tabac: int
+
+# =========================
+# PATIENTS
+# =========================
+@app.get("/patients")
+def get_patients():
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("SELECT * FROM patients")
+    rows = cur.fetchall()
+
+    conn.close()
+    return rows
+
+# =========================
+# PREDICTION
+# =========================
+@app.post("/predict")
+def predict(p: PatientInput):
+
+    sample = [[
+        p.age,
+        p.sexe,
+        p.obstruction_nasale,
+        p.rhinorrhee,
+        p.epistaxis,
+        p.anosmie,
+        p.tabac
+    ]]
+
+    pred = model.predict(sample)
+    result = encoder.inverse_transform(pred)
+
+    return {
+        "prediction": result[0]
+    }
+
+# =========================
+# 🔥 NOUVEAU : SCORE DE RISQUE CANCER ORL
+# =========================
+@app.post("/risk")
+def risk(p: PatientInput):
+
+    score = 0
+
+    # facteurs simples médicaux
+    if p.tabac == 1:
+        score += 40
+    if p.epistaxis == 1:
+        score += 25
+    if p.anosmie == 1:
+        score += 15
+    if p.obstruction_nasale == 1:
+        score += 10
+    if p.rhinorrhee == 1:
+        score += 5
+    if p.age > 50:
+        score += 10
+
+    # normalisation
+    if score > 100:
+        score = 100
+
+    # interprétation clinique
+    if score < 30:
+        niveau = "Faible"
+    elif score < 60:
+        niveau = "Modéré"
+    else:
+        niveau = "Élevé"
+
+    return {
+        "score": score,
+        "niveau_risque": niveau
+    }
+```
+
+---
+
+# 🚀 ÉTAPE 2 — LANCER LE SERVEUR
+
+## 🟢 SHELL 1
+
+```powershell
+uvicorn main:app --reload
+```
+
+---
+
+# 🚀 ÉTAPE 3 — TESTS
+
+## 🌐 1. API Docs
+
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+## 🧪 2. Test prediction
+
+```json
+{
+  "age": 60,
+  "sexe": 1,
+  "obstruction_nasale": 1,
+  "rhinorrhee": 1,
+  "epistaxis": 0,
+  "anosmie": 0,
+  "tabac": 0
+}
+```
+
+---
+
+## 🧪 3. Test RISK (nouveau)
+
+```json
+{
+  "age": 65,
+  "sexe": 1,
+  "obstruction_nasale": 1,
+  "rhinorrhee": 0,
+  "epistaxis": 1,
+  "anosmie": 1,
+  "tabac": 1
+}
+```
+
+---
+
+# 🎯 RÉSULTAT ATTENDU
+
+## 🔵 prediction
+
+```json
+{"prediction": "Cancer du cavum"}
+```
+
+## 🔴 risk
+
+```json
+{
+  "score": 85,
+  "niveau_risque": "Élevé"
+}
+```
+
+---
+
+# 🧠 CE QUE TU VIENS D’AJOUTER
+
+✔ scoring médical (comme triage hôpital)
+✔ API multi-endpoint
+✔ logique clinique interprétable
+✔ IA + règles médicales hybrides
+
+---
+
+# 🚀 ARCHITECTURE ACTUELLE
+
+```
+Client
+  ↓
+FastAPI ORL IA
+  ↓
+ML + Risk Engine
+  ↓
+MariaDB :contentReference[oaicite:1]{index=1}
+```
+
+---
+
+# 🚀 PROCHAINE ÉTAPE (DOCKER READY)
+
+Ensuite on va containeriser :
+
+## 🔥 FastAPI
+
+## 🔥 MariaDB
+
+## 🔥 IA modèle
+
+en une seule commande :
+
+```bash
+docker-compose up
+```
+
+---
+
+👉 Quand tu es prêt, dis :
+
+**“DOCKER”**
+
+et je te fais un système hospitalier ORL complet containerisé 🚀
+

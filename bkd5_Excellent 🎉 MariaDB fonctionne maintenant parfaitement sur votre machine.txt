@@ -1,0 +1,333 @@
+Excellent 🎉 MariaDB fonctionne maintenant parfaitement sur votre machine
+MariaDB fonctionne maintenant parfaitement sur votre machine.
+
+Vous avez réussi :
+
+* installation MariaDB 12.3
+* démarrage du service Windows
+* réinitialisation du mot de passe root
+* connexion SQL
+* exécution de requêtes SQL
+
+Votre environnement est maintenant prêt pour :
+
+* Python + SQLAlchemy
+* FastAPI
+* DBeaver
+* Docker
+* APIs ORL IA
+* projets médicaux et IA
+
+Vous êtes actuellement connecté dans :
+
+```sql id="8y37p2"
+MariaDB [(none)]>
+```
+
+Vous pouvez déjà tester :
+
+## Créer une base
+
+```sql id="11zc2k"
+CREATE DATABASE orl_ia;
+```
+
+## Vérifier
+
+```sql id="dx21p7"
+SHOW DATABASES;
+```
+
+## Utiliser la base
+
+```sql id="8j0a7h"
+USE orl_ia;
+```
+
+## Créer une table
+
+```sql id="z6e6ij"
+CREATE TABLE patients (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(100),
+    age INT,
+    diagnostic VARCHAR(255)
+);
+```
+
+## Vérifier les tables
+
+```sql id="j07v0q"
+SHOW TABLES;
+```
+
+## Ajouter des données
+
+```sql id="j6u2g3"
+INSERT INTO patients (nom, age, diagnostic)
+VALUES ('Diallo', 45, 'Sinusite chronique');
+```
+
+## Lire les données
+
+```sql id="yrh1dn"
+SELECT * FROM patients;
+```
+
+Vous devriez voir votre première ligne enregistrée dans MariaDB 🚀
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++RESULTATS bkdkmc++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| test               |
++--------------------+
+5 rows in set (0.022 sec)
+
+MariaDB [(none)]> CREATE DATABASE orl_ia;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| orl_ia             |
+| performance_schema |
+| sys                |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> USE orl_ia;
+Database changed
+MariaDB [orl_ia]> CREATE TABLE patients (
+    ->     id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     nom VARCHAR(100),
+    ->     age INT,
+    ->     diagnostic VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [orl_ia]> SHOW TABLES;
++------------------+
+| Tables_in_orl_ia |
++------------------+
+| patients         |
++------------------+
+1 row in set (0.001 sec)
+
+MariaDB [orl_ia]> INSERT INTO patients (nom, age, diagnostic)
+    -> VALUES ('Diallo', 45, 'Sinusite chronique');
+Query OK, 1 row affected (0.046 sec)
+
+MariaDB [orl_ia]> SELECT * FROM patients;
++----+--------+------+--------------------+
+| id | nom    | age  | diagnostic         |
++----+--------+------+--------------------+
+|  1 | Diallo |   45 | Sinusite chronique |
++----+--------+------+--------------------+
+1 row in set (0.017 sec)
+
+MariaDB [orl_ia]>
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+Félicitations 🎉
+Votre base ORL IA fonctionne parfaitement avec MariaDB.
+
+Vous avez maintenant :
+
+* une base `orl_ia`
+* une table `patients`
+* une insertion de données réussie
+* une requête SQL fonctionnelle
+
+Votre environnement SQL est opérationnel.
+
+Vous pouvez déjà faire des requêtes utiles :
+
+## Ajouter plusieurs patients
+
+```sql id="px9wyf"
+INSERT INTO patients (nom, age, diagnostic)
+VALUES
+('Sow', 30, 'Otite'),
+('Ndiaye', 52, 'Polype nasal'),
+('Ba', 41, 'Cancer du larynx');
+```
+
+## Afficher tout
+
+```sql id="o7kw3u"
+SELECT * FROM patients;
+```
+
+## Rechercher un diagnostic
+
+```sql id="zshl2n"
+SELECT * FROM patients
+WHERE diagnostic LIKE '%larynx%';
+```
+
+## Trier par âge
+
+```sql id="wq34zw"
+SELECT * FROM patients
+ORDER BY age DESC;
+```
+
+## Compter les patients
+
+```sql id="6vuy8q"
+SELECT COUNT(*) AS total_patients
+FROM patients;
+```
+
+## Voir la structure de la table
+
+```sql id="v4n8fg"
+DESCRIBE patients;
+```
+
+La prochaine étape naturelle pourrait être :
+
+* connecter Python (`mariadb` ou `sqlalchemy`)
+* utiliser DBeaver avec MariaDB
+* créer une API FastAPI
+* connecter Docker
+* construire une application ORL IA complète
+
+Par exemple, pour quitter MariaDB :
+
+```sql id="fns8ee"
+exit
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
